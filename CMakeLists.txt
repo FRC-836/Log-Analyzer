@@ -20,7 +20,7 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5gui REQUIRED)
 
 #dependencies
-add_subdirectory(deps/OutputManager_qt)
+add_subdirectory(deps/QtOutputManager)
 
 #configure output directories
 if(WIN32)
@@ -55,7 +55,7 @@ set(forms
 #setup inc as a valid include directory
 include_directories(${CMAKE_SOURCE_DIR}/inc
                     ${CMAKE_CURRENT_BINARY_DIR}
-                    ${CMAKE_SOURCE_DIR}/deps/OutputManager_qt/inc
+                    ${CMAKE_SOURCE_DIR}/deps/QtOutputManager/inc
                     )
                     
 #create executable
