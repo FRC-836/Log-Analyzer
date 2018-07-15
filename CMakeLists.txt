@@ -44,9 +44,11 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_SYSTEM_NAME}${ARC
 
 set(src src/main.cpp
         src/DsLogReader.cpp
+        src/BinaryReader.cpp
         )
         
 set(inc inc/DsLogReader.h
+        inc/BinaryReader.h
         )
         
 set(forms 

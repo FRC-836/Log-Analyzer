@@ -5,6 +5,7 @@
 #include <qdatetime.h>
 #include <qstring.h>
 #include <qfile.h>
+#include <qbytearray.h>
 
 /**
  * class for containing a single entry in a DriverStation log file
@@ -63,9 +64,9 @@ private:
   virtual void readFile(const QString& path)
   {
     QFile log(path);
-    if (log.exists(path))
+    if (log.open(QIODevice::ReadOnly))
     {
-      BinaryReader2 reader = new BinaryReader2(File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+      QByteArray bytes = log.readAll();
       m_version = reader.ReadInt32();
       if (Version == 3)
       {
