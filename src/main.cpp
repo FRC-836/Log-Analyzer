@@ -3,6 +3,9 @@
 
 #include "OutputManager.h"
 
+//TEMP
+#include "DsLogReader.h"
+
 OutputManager cout(stdout);
 
 int main(int argc, char** argv)
