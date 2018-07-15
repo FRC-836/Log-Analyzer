@@ -3,7 +3,12 @@
 
 #include <qvector.h>
 #include <qdatetime.h>
+#include <qstring.h>
+#include <qfile.h>
 
+/**
+ * class for containing a single entry in a DriverStation log file
+ */
 class DsLogEntry
 {
 public:
@@ -45,4 +50,52 @@ public:
   {
   }
 };
+
+class DsLogReader
+{
+private:
+  //member variables
+  QVector<DsLogEntry> m_entries;
+  int m_version;
+  QDateTime m_startTime;
+
+  //private functions
+  virtual void readFile(const QString& path)
+  {
+    QFile log(path);
+    if (log.exists(path))
+    {
+      BinaryReader2 reader = new BinaryReader2(File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+      m_version = reader.ReadInt32();
+      if (Version == 3)
+      {
+        StartTime = FromLVTime(reader.ReadInt64(), reader.ReadUInt64());
+        int i = 0;
+        while (reader.BaseStream.Position != reader.BaseStream.Length)
+        {
+          Entries.Add(new Entry(TripTimeToDouble(reader.ReadByte()), PacketLossToDouble(reader.ReadSByte()), VoltageToDouble(reader.ReadUInt16()), RoboRioCPUToDouble(reader.ReadByte()), StatusFlagsToBooleanArray(reader.ReadByte()), CANUtilToDouble(reader.ReadByte()), WifidBToDouble(reader.ReadByte()), BandwidthToDouble(reader.ReadUInt16()), reader.ReadByte(), PDPValuesToArrayList(reader.ReadBytes(21)), reader.ReadByte(), reader.ReadByte(), reader.ReadByte(), StartTime.AddMilliseconds(20 * i++)));
+        }
+      }
+    } //end  if (log.exists(path)
+    else
+    {
+    } //end  els
+  }
+
+
+public:
+  //constructors
+  DsLogReader(const QString& path)
+  {
+    readFile(path);
+  }
+
+  //public functions
+
+
+  //getters
+
+  //setters
+};
+
 #endif
