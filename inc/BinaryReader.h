@@ -33,6 +33,7 @@ public:
   virtual std::int64_t readInt64();
   virtual bool readyToRead() const;
   virtual bool eof() const;
+  virtual int size() const;
 
   //getters
   virtual int getPos() const;

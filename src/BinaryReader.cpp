@@ -99,6 +99,10 @@ bool BinaryReader::eof() const
 {
   return m_pos >= m_bytes.size();
 }
+int BinaryReader::size() const
+{
+  return m_bytes.size();
+}
 
 //getters
 int BinaryReader::getPos() const
