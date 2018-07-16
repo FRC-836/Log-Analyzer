@@ -133,3 +133,8 @@ DsLogReader::DsLogReader(const QString& path)
 {
   readFile(path);
 }
+
+QVector<DsLogEntry> DsLogReader::getEntries() const
+{
+  return m_entries;
+}

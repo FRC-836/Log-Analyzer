@@ -92,8 +92,8 @@ public:
 
   //public functions
 
-
   //getters
+  QVector<DsLogEntry> getEntries() const;
 
   //setters
 };
