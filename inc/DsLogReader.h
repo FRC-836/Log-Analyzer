@@ -1,11 +1,14 @@
 #ifndef LOG_ANALYZER_DS_LOG_READER_H
 #define LOG_ANALYZER_DS_LOG_READER_H
 
+#include <limits>
+
 #include <qvector.h>
 #include <qdatetime.h>
 #include <qstring.h>
 #include <qfile.h>
 #include <qbytearray.h>
+#include <qtimezone.h>
 
 #include "BinaryReader.h"
 

@@ -36,11 +36,12 @@ void DsLogReader::readFile(const QString& path)
 }
 QDateTime DsLogReader::FromLVTime(long unixTime, std::uint64_t ummm)
 {
-  var epoch = new DateTime(1904, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-  epoch = epoch.AddSeconds(unixTime);
-  epoch = TimeZoneInfo.ConvertTimeFromUtc(epoch, TimeZoneInfo.Local);
+  //have to use this instead of msecsFromEpoc because QT Epoch 1970
+  auto epoch = QDateTime(QDate(1904, 1, 1), QTime(0, 0, 0), Qt::UTC);
+  epoch = epoch.addSecs(unixTime);
+  epoch = epoch.toTimeZone(QTimeZone::systemTimeZone());
 
-  return epoch.AddSeconds(((double)ummm / UInt64.MaxValue));
+  return epoch.addSecs(((double)ummm / std::numeric_limits<std::uint64_t>::max()));
 }
 double DsLogReader::TripTimeToDouble(std::uint8_t b)
 {
