@@ -47,22 +47,18 @@ double DsLogReader::TripTimeToDouble(std::uint8_t b)
 {
   return (double)b * 0.5;
 }
-
 double DsLogReader::PacketLossToDouble(std::int8_t b)
 {
   return (double)(b * 4) * .01;
 }
-
 double DsLogReader::VoltageToDouble(std::uint16_t i)
 {
   return (double)i * .00390625;
 }
-
 double DsLogReader::RoboRioCPUToDouble(std::uint8_t b)
 {
   return ((double)b * 0.5) * .01;
 }
-
 QVector<bool> DsLogReader::StatusFlagsToBooleanArray(std::uint8_t b)
 {
   QVector<bool> statusFlags;
@@ -73,17 +69,14 @@ QVector<bool> DsLogReader::StatusFlagsToBooleanArray(std::uint8_t b)
   } //end  for (int i = 0; i < (int)DsLogEntry::STATUS_FLAGS::NUM_STATUS_FLAGS; i++
   return statusFlags;
 }
-
 double DsLogReader::CANUtilToDouble(std::uint8_t b)
 {
   return ((double)b * 0.5) * .01;
 }
-
 double DsLogReader::WifidBToDouble(std::uint8_t b)
 {
   return ((double)b * 0.5) * .01;
 }
-
 double DsLogReader::BandwidthToDouble(std::uint16_t i)
 {
   return (double)i * .00390625;
@@ -105,13 +98,13 @@ QVector<double> DsLogReader::PDPValuesToArrayList(QVector<std::uint8_t> ba)
         if (n == 0)
         {
           d[(s * 3) + n] = (double)(static_cast<std::uint16_t>(b5[0] << 2) + static_cast<std::uint16_t>(b5[1] >> 6) * .125);
-        }
+        } //end  if (n == 0
         else
         {
           d[(s * 3) + n] = (double)(static_cast<std::uint16_t>(((std::uint16_t)((std::uint8_t)(b5[n] << (n * 2)))) << 2) + static_cast<std::uint16_t>(b5[n + 1] >> (6 - (n * 2)))) * .125;
-        }
-      }
-    }
+        } //end  els
+      } //end  for (int n = 0; n < 4; ++n
+    } //end  if (s % 2 == 0
     else
     {
       QVector<std::uint8_t> b3(3);
@@ -124,17 +117,14 @@ QVector<double> DsLogReader::PDPValuesToArrayList(QVector<std::uint8_t> ba)
         if (n == 0)
         {
           d[((s * 3) + 1) + n] = (double)(static_cast<uint16_t>(b3[0] << 2) + static_cast<std::uint16_t>(b3[1] >> 6)) * .125;
-        }
+        } //end  if (n == 0
         else
         {
           d[((s * 3) + 1) + n] = (double)(static_cast<uint16_t>(((std::uint16_t)((std::uint8_t)(b3[1] << 2))) << 2) + static_cast<std::uint16_t>(b3[2] >> 4)) * .125;
-        }
-      }
-    }
-  }
-
-
-
+        } //end  els
+      } //end  for (int n = 0; n < 2; ++n
+    } //end  els
+  } //end  for (int s = 0; s < 5; s++
   return d;
 }
 
