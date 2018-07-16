@@ -13,8 +13,6 @@ int main(int argc, char** argv)
 {
   QApplication app(argc, argv);
 
-  cout << "hello world" << endl;
-
   QTextEdit e;
   e.show();
 
