@@ -45,7 +45,7 @@ QDateTime DsLogReader::FromLVTime(long unixTime, std::uint64_t ummm)
 }
 double DsLogReader::TripTimeToDouble(std::uint8_t b)
 {
-  return (double)b * 0.5d;
+  return (double)b * 0.5;
 }
 
 double DsLogReader::PacketLossToDouble(std::int8_t b)
@@ -55,33 +55,33 @@ double DsLogReader::PacketLossToDouble(std::int8_t b)
 
 double DsLogReader::VoltageToDouble(std::uint16_t i)
 {
-  return (double)i * .00390625d;
+  return (double)i * .00390625;
 }
 
 double DsLogReader::RoboRioCPUToDouble(std::uint8_t b)
 {
-  return ((double)b * 0.5d) * .01d;
+  return ((double)b * 0.5) * .01;
 }
 
 QVector<bool> DsLogReader::StatusFlagsToBooleanArray(std::uint8_t b)
 {
-  byte[] bytes = { b };
+  QVector<std::uint8_t> bytes(b);
   return bytes.SelectMany(GetBits).ToArray();
 }
 
 double DsLogReader::CANUtilToDouble(std::uint8_t b)
 {
-  return ((double)b * 0.5d) * .01d;
+  return ((double)b * 0.5) * .01;
 }
 
 double DsLogReader::WifidBToDouble(std::uint8_t b)
 {
-  return ((double)b * 0.5d) * .01d;
+  return ((double)b * 0.5) * .01;
 }
 
 double DsLogReader::BandwidthToDouble(std::uint16_t i)
 {
-  return (double)i * .00390625d;
+  return (double)i * .00390625;
 }
 QVector<double> DsLogReader::PDPValuesToArrayList(QVector<std::uint8_t> ba)
 {
@@ -96,11 +96,11 @@ QVector<double> DsLogReader::PDPValuesToArrayList(QVector<std::uint8_t> ba)
       {
         if (n == 0)
         {
-          d[(s * 3) + n] = (double)(Convert.ToUInt16(b5[0] << 2) + Convert.ToUInt16(b5[1] >> 6)) * .125d;
+          d[(s * 3) + n] = (double)(Convert.ToUInt16(b5[0] << 2) + Convert.ToUInt16(b5[1] >> 6)) * .125;
         }
         else
         {
-          d[(s * 3) + n] = (double)(Convert.ToUInt16(((UInt16)((byte)(b5[n] << (n * 2)))) << 2) + Convert.ToUInt16(b5[n + 1] >> (6 - (n * 2)))) * .125d;
+          d[(s * 3) + n] = (double)(Convert.ToUInt16(((UInt16)((byte)(b5[n] << (n * 2)))) << 2) + Convert.ToUInt16(b5[n + 1] >> (6 - (n * 2)))) * .125;
         }
       }
     }
@@ -112,11 +112,11 @@ QVector<double> DsLogReader::PDPValuesToArrayList(QVector<std::uint8_t> ba)
       {
         if (n == 0)
         {
-          d[((s * 3) + 1) + n] = (double)(Convert.ToUInt16(b3[0] << 2) + Convert.ToUInt16(b3[1] >> 6)) * .125d;
+          d[((s * 3) + 1) + n] = (double)(Convert.ToUInt16(b3[0] << 2) + Convert.ToUInt16(b3[1] >> 6)) * .125;
         }
         else
         {
-          d[((s * 3) + 1) + n] = (double)(Convert.ToUInt16(((UInt16)((byte)(b3[1] << 2))) << 2) + Convert.ToUInt16(b3[2] >> 4)) * .125d;
+          d[((s * 3) + 1) + n] = (double)(Convert.ToUInt16(((UInt16)((byte)(b3[1] << 2))) << 2) + Convert.ToUInt16(b3[2] >> 4)) * .125;
         }
       }
     }
