@@ -2,6 +2,7 @@
 #define LOG_ANALYZER_BINARY_READER_H
 
 #include <stdint.h>
+#include <algorithm>
 
 #include <qfile.h>
 #include <qbytearray.h>
@@ -15,6 +16,9 @@ protected:
   int m_pos ; //current position in the byte array
   QByteArray m_bytes; //bytes read from the binary file
   bool m_error;
+
+  //private functions
+  virtual void reverseBytes(QVector<std::uint8_t>& toReverse);
 
 public:
   //constructors

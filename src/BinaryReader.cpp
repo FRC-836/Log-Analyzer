@@ -1,5 +1,15 @@
 #include "BinaryReader.h"
 
+//private functions
+void BinaryReader::reverseBytes(QVector<std::uint8_t>& toReverse)
+{
+  auto temp = toReverse;
+  for (int i = 0; i < toReverse.size(); i++)
+  {
+    toReverse[i] = temp[temp.size() - i - 1];
+  } //end  for (int i = 0; i < toReverse.size(); i++)
+}
+
 //constructors
 BinaryReader::BinaryReader(const QString& file)
 {
@@ -48,17 +58,20 @@ std::uint8_t BinaryReader::readUint8()
 std::uint16_t BinaryReader::readUint16()
 {
   auto bytesRead = readBytes(2);
+  reverseBytes(bytesRead);
   return static_cast<std::uint16_t>((bytesRead[0] << 8) | bytesRead[1]);
 }
 std::uint32_t BinaryReader::readUint32()
 {
   auto bytesRead = readBytes(4);
+  reverseBytes(bytesRead);
   return static_cast<std::uint32_t>((bytesRead[0] << 24) | (bytesRead[1] << 16) | 
                                     (bytesRead [2] << 8) | bytesRead[3]);
 }
 std::uint64_t BinaryReader::readUint64()
 {
   auto bytesRead = readBytes(8);
+  reverseBytes(bytesRead);
   std::uint64_t toReturn = 0;
   for (int i = 7; i >= 0; i--)
   {
@@ -73,17 +86,20 @@ std::int8_t BinaryReader::readInt8()
 std::int16_t BinaryReader::readInt16()
 {
   auto bytesRead = readBytes(2);
+  reverseBytes(bytesRead);
   return static_cast<std::int16_t>((bytesRead[0] << 8) | bytesRead[1]);
 }
 std::int32_t BinaryReader::readInt32()
 {
   auto bytesRead = readBytes(4);
+  reverseBytes(bytesRead);
   return static_cast<std::int32_t>((bytesRead[0] << 24) | (bytesRead[1] << 16) | 
                                    (bytesRead [2] << 8) | bytesRead[3]);
 }
 std::int64_t BinaryReader::readInt64()
 {
   auto bytesRead = readBytes(8);
+  reverseBytes(bytesRead);
   std::int64_t toReturn = 0;
   for (int i = 7; i >= 0; i--)
   {
