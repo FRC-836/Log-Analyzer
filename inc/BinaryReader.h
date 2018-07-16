@@ -6,13 +6,15 @@
 #include <qfile.h>
 #include <qbytearray.h>
 #include <qstring.h>
+#include <qvector.h>
 
 class BinaryReader
 {
 protected:
   //member variables
-  int m_pos; //current position in the byte array
-  std::unique_ptr<QByteArray> m_bytes; //bytes read from the binary file
+  int m_pos ; //current position in the byte array
+  QByteArray m_bytes; //bytes read from the binary file
+  bool m_error;
 
 public:
   //constructors
@@ -29,6 +31,7 @@ public:
   virtual std::int16_t readInt16();
   virtual std::int32_t readInt32();
   virtual std::int64_t readInt64();
+  virtual bool readyToRead() const;
 
   //getters
   virtual int getPos() const;
