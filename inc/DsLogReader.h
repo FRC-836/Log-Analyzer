@@ -46,6 +46,13 @@ public:
   const QVector<double> m_pdpCurrents;
   const QDateTime m_time;
 
+  DsLogEntry()
+    : m_tripTime(0), m_lostPackets(0), m_voltage(0), m_roboRioCpu(0),
+      m_canUtil(0), m_wifiDb(0), m_bandwith(0), m_pdpResistance(0),
+      m_pdpVoltage(0), m_pdpTemp(0), m_statusFlags(QVector<bool>()), m_pdpId(0),
+      m_pdpCurrents(QVector<double>()), m_time(QDateTime())
+  {
+  }
   DsLogEntry(double trip, double packets, double vol, double rrCPU,
              const QVector<bool>& flags, double can, double dB, double band, int pdp,
              const QVector<double>& pdpCurrents, double res, double pdpV, double temp,
