@@ -90,38 +90,44 @@ double DsLogReader::BandwidthToDouble(std::uint16_t i)
 }
 QVector<double> DsLogReader::PDPValuesToArrayList(QVector<std::uint8_t> ba)
 {
-  double[] d = new double[16];
+  QVector<double> d(16);
   for (int s = 0; s < 5; s++)
   {
     if (s % 2 == 0)
     {
-      byte[] b5 = new byte[5];
-      Array.Copy(ba, s * 4, b5, 0, 5);
+      QVector<std::uint8_t> b5(5);
+      for (int i = 0; i < 5; i++)
+      {
+        b5[i] = ba[s * 4 + i];
+      } //end  for (int i = 0; i < 5; i++
       for (int n = 0; n < 4; ++n)
       {
         if (n == 0)
         {
-          d[(s * 3) + n] = (double)(Convert.ToUInt16(b5[0] << 2) + Convert.ToUInt16(b5[1] >> 6)) * .125;
+          d[(s * 3) + n] = (double)(static_cast<std::uint16_t>(b5[0] << 2) + static_cast<std::uint16_t>(b5[1] >> 6) * .125);
         }
         else
         {
-          d[(s * 3) + n] = (double)(Convert.ToUInt16(((UInt16)((byte)(b5[n] << (n * 2)))) << 2) + Convert.ToUInt16(b5[n + 1] >> (6 - (n * 2)))) * .125;
+          d[(s * 3) + n] = (double)(static_cast<std::uint16_t>(((std::uint16_t)((std::uint8_t)(b5[n] << (n * 2)))) << 2) + static_cast<std::uint16_t>(b5[n + 1] >> (6 - (n * 2)))) * .125;
         }
       }
     }
     else
     {
-      byte[] b3 = new byte[3];
-      Array.Copy(ba, (s * 4) + 1, b3, 0, 3);
+      QVector<std::uint8_t> b3(3);
+      for (int i = 0; i < 3; i++)
+      {
+        b3[i] = ba[s * 4 + 1 + i];
+      } //end  for (int i = 0; i < 3; i++
       for (int n = 0; n < 2; ++n)
       {
         if (n == 0)
         {
-          d[((s * 3) + 1) + n] = (double)(Convert.ToUInt16(b3[0] << 2) + Convert.ToUInt16(b3[1] >> 6)) * .125;
+          d[((s * 3) + 1) + n] = (double)(static_cast<uint16_t>(b3[0] << 2) + static_cast<std::uint16_t>(b3[1] >> 6)) * .125;
         }
         else
         {
-          d[((s * 3) + 1) + n] = (double)(Convert.ToUInt16(((UInt16)((byte)(b3[1] << 2))) << 2) + Convert.ToUInt16(b3[2] >> 4)) * .125;
+          d[((s * 3) + 1) + n] = (double)(static_cast<uint16_t>(((std::uint16_t)((std::uint8_t)(b3[1] << 2))) << 2) + static_cast<std::uint16_t>(b3[2] >> 4)) * .125;
         }
       }
     }
