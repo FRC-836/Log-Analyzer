@@ -27,7 +27,8 @@ public:
     DS_DISABLED,
     ROBOT_TELE,
     ROBOT_AUTO,
-    ROBOT_DISABLED
+    ROBOT_DISABLED,
+    NUM_STATUS_FLAGS //MUST BE LAST
   };
 
   const double m_tripTime;
@@ -77,7 +78,6 @@ private:
   double WifidBToDouble(std::uint8_t b);
   double BandwidthToDouble(std::uint16_t i);
   QVector<double> PDPValuesToArrayList(QVector<std::uint8_t> ba);
-  QVector<bool> GetBits(std::uint8_t b);
 
 public:
   //constructors

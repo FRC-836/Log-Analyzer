@@ -65,8 +65,13 @@ double DsLogReader::RoboRioCPUToDouble(std::uint8_t b)
 
 QVector<bool> DsLogReader::StatusFlagsToBooleanArray(std::uint8_t b)
 {
-  QVector<std::uint8_t> bytes(b);
-  return bytes.SelectMany(GetBits).ToArray();
+  QVector<bool> statusFlags;
+  for (int i = 0; i < (int)DsLogEntry::STATUS_FLAGS::NUM_STATUS_FLAGS; i++)
+  {
+    statusFlags.push_back(b & 0x80);
+    b << 1;
+  } //end  for (int i = 0; i < (int)DsLogEntry::STATUS_FLAGS::NUM_STATUS_FLAGS; i++
+  return statusFlags;
 }
 
 double DsLogReader::CANUtilToDouble(std::uint8_t b)
@@ -126,16 +131,6 @@ QVector<double> DsLogReader::PDPValuesToArrayList(QVector<std::uint8_t> ba)
 
   return d;
 }
-
-QVector<bool> DsLogReader::GetBits(std::uint8_t b)
-{
-  for (int i = 0; i < 8; i++)
-  {
-    yield return !((b & 0x80) != 0);
-    b *= 2;
-  }
-}
-
 
 //constructors
 DsLogReader::DsLogReader(const QString& path)
