@@ -95,6 +95,10 @@ bool BinaryReader::readyToRead() const
 {
   return !m_error;
 }
+bool BinaryReader::eof() const
+{
+  return m_pos >= m_bytes.size();
+}
 
 //getters
 int BinaryReader::getPos() const

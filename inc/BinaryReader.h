@@ -32,6 +32,7 @@ public:
   virtual std::int32_t readInt32();
   virtual std::int64_t readInt64();
   virtual bool readyToRead() const;
+  virtual bool eof() const;
 
   //getters
   virtual int getPos() const;
