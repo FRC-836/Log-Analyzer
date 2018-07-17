@@ -9,7 +9,7 @@ void DsLogReader::readFile(const QString& path)
     m_version = reader.readInt32();
     if (m_version == 3)
     {
-      auto unixTime = reader.readInt64();
+      auto unixTime = reader.readUint64();
       auto ummm = reader.readUint64();
       m_startTime = FromLVTime(unixTime, ummm);
       int i = 0;
