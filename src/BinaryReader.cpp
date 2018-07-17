@@ -59,14 +59,23 @@ std::uint16_t BinaryReader::readUint16()
 {
   auto bytesRead = readBytes(2);
   //reverseBytes(bytesRead);
-  return static_cast<std::uint16_t>((bytesRead[0] << 8) | bytesRead[1]);
+  std::uint16_t toReturn = 0;
+  for (int i = 1; i >= 0; i--)
+  {
+    toReturn |= (std::uint16_t)(((std::uint16_t)bytesRead[(1 - i)]) << (std::uint16_t)(i * 8));
+  } //end  for (int i = 7; i >= 0; i--
+  return toReturn;
 }
 std::uint32_t BinaryReader::readUint32()
 {
   auto bytesRead = readBytes(4);
   //reverseBytes(bytesRead);
-  return static_cast<std::uint32_t>((bytesRead[0] << 24) | (bytesRead[1] << 16) | 
-                                    (bytesRead [2] << 8) | bytesRead[3]);
+  std::uint32_t toReturn = 0;
+  for (int i = 3; i >= 0; i--)
+  {
+    toReturn |= (std::uint32_t)(((std::uint32_t)bytesRead[(3 - i)]) << (std::uint32_t)(i * 8));
+  } //end  for (int i = 7; i >= 0; i--
+  return toReturn;
 }
 std::uint64_t BinaryReader::readUint64()
 {
@@ -76,10 +85,6 @@ std::uint64_t BinaryReader::readUint64()
   for (int i = 7; i >= 0; i--)
   {
     toReturn |= (std::uint64_t)(((std::uint64_t)bytesRead[(7 - i)]) << (std::uint64_t)(i * 8));
-    //std::uint64_t a = bytesRead[7 - i];
-    //std::uint64_t toShiftBy = i * 8;
-    //std::uint64_t b = a << toShiftBy;
-    //toReturn |= b;
   } //end  for (int i = 7; i >= 0; i--
   return toReturn;
 }
