@@ -15,19 +15,32 @@ void DsLogReader::readFile(const QString& path)
       int i = 0;
       while (reader.getPos() < reader.size())
       {
-        m_entries.push_back(DsLogEntry(TripTimeToDouble(reader.readUint8()), 
-                                       PacketLossToDouble(reader.readInt8()), 
-                                       VoltageToDouble(reader.readUint16()), 
-                                       RoboRioCPUToDouble(reader.readUint8()), 
-                                       StatusFlagsToBooleanArray(reader.readUint8()), 
-                                       CANUtilToDouble(reader.readUint8()), 
-                                       WifidBToDouble(reader.readUint8()), 
-                                       BandwidthToDouble(reader.readUint16()), 
-                                       reader.readUint8(), 
-                                       PDPValuesToArrayList(reader.readBytes(21)), 
-                                       reader.readUint8(), 
-                                       reader.readUint8(), 
-                                       reader.readUint8(), 
+        auto tripTime = reader.readUint8();
+        auto packetLoss = reader.readInt8();
+        auto voltage = reader.readUint16();
+        auto cpu = reader.readUint8();
+        auto statusFlags = reader.readUint8();
+        auto canUtil = reader.readUint8();
+        auto wifi = reader.readUint8();
+        auto bandwidth = reader.readUint16();
+        auto pdpId = reader.readUint8();
+        auto currents = reader.readBytes(21);
+        auto res = reader.readUint8();
+        auto pdpv = reader.readUint8();
+        auto temp = reader.readUint8();
+        m_entries.push_back(DsLogEntry(TripTimeToDouble(tripTime),
+                                       PacketLossToDouble(packetLoss),
+                                       VoltageToDouble(voltage), 
+                                       RoboRioCPUToDouble(cpu), 
+                                       StatusFlagsToBooleanArray(statusFlags), 
+                                       CANUtilToDouble(canUtil), 
+                                       WifidBToDouble(wifi), 
+                                       BandwidthToDouble(bandwidth), 
+                                       pdpId, 
+                                       PDPValuesToArrayList(currents), 
+                                       res, 
+                                       pdpv, 
+                                       temp, 
                                        m_startTime.addMSecs(20 * i++)));
       } //end  while (reader.getPos() < reader.size()
     }
