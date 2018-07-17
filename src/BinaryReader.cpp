@@ -75,7 +75,11 @@ std::uint64_t BinaryReader::readUint64()
   std::uint64_t toReturn = 0;
   for (int i = 7; i >= 0; i--)
   {
-    toReturn |= (bytesRead[7 - i] << (i * 8));
+    toReturn |= (std::uint64_t)(((std::uint64_t)bytesRead[(7 - i)]) << (std::uint64_t)(i * 8));
+    //std::uint64_t a = bytesRead[7 - i];
+    //std::uint64_t toShiftBy = i * 8;
+    //std::uint64_t b = a << toShiftBy;
+    //toReturn |= b;
   } //end  for (int i = 7; i >= 0; i--
   return toReturn;
 }
