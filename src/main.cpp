@@ -26,7 +26,7 @@ int main(int argc, char** argv)
     file << "Trip Time, Lost Packets, Voltage, RobotRIO CPU, CAN Utilization, ";
     for (int i = 0; i < (int)DsLogEntry::STATUS_FLAGS::NUM_STATUS_FLAGS; i++)
     {
-      file << DsLogEntry::STATUS_FLAG_STR[static_cast<DsLogEntry::STATUS_FLAGS>(i)] << ", ";
+      file << DsLogEntry::STATUS_FLAG_STR[static_cast<DsLogEntry::STATUS_FLAGS>(i)].toStdString() << ", ";
     }
     for (int i = 0; i < entries[0].m_pdpCurrents.size(); i++)
     {

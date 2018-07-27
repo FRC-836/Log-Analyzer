@@ -124,7 +124,7 @@ QVector<double> DsLogReader::PDPValuesToArrayList(QVector<std::uint8_t> ba)
       {
         if (n == 0)
         {
-          d[(s * 3) + n] = (double)(static_cast<std::uint16_t>(b5[0] << 2) + static_cast<std::uint16_t>(b5[1] >> 6) * .125);
+          d[(s * 3) + n] = (double)(static_cast<std::uint16_t>(b5[0] << 2) + static_cast<std::uint16_t>(b5[1] >> 6)) * .125;
         } //end  if (n == 0
         else
         {
