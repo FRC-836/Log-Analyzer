@@ -79,8 +79,8 @@ QVector<bool> DsLogReader::StatusFlagsToBooleanArray(std::uint8_t b)
   QVector<bool> statusFlags;
   for (int i = 0; i < (int)DsLogEntry::STATUS_FLAGS::NUM_STATUS_FLAGS; i++)
   {
-    statusFlags.push_back(b & 0x80);
-    b << 1;
+    statusFlags.push_back(!(b & 0x80));
+    b = b << 1;
   } //end  for (int i = 0; i < (int)DsLogEntry::STATUS_FLAGS::NUM_STATUS_FLAGS; i++
   return statusFlags;
 }
