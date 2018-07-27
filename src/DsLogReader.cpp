@@ -1,5 +1,17 @@
 #include "DsLogReader.h"
 
+const QMap<DsLogEntry::STATUS_FLAGS, QString> DsLogEntry::STATUS_FLAG_STR = {
+  {STATUS_FLAGS::BROWNOUT,         "Brownout"},
+  {STATUS_FLAGS::WATCHDOG,         "Watchdog"},
+  {STATUS_FLAGS::DS_TELE,          "DS_Tele"},
+  {STATUS_FLAGS::DS_AUTO,          "DS_Auto"},
+  {STATUS_FLAGS::DS_DISABLED,      "DS_Disabled"},
+  {STATUS_FLAGS::ROBOT_AUTO,       "Robot_Auto"},
+  {STATUS_FLAGS::ROBOT_TELE,       "Robot_Tele"},
+  {STATUS_FLAGS::ROBOT_DISABLED,   "Robot_Disabled"},
+  {STATUS_FLAGS::NUM_STATUS_FLAGS, "Invalid"},
+};
+
 //private functions
 void DsLogReader::readFile(const QString& path)
 {

@@ -30,6 +30,7 @@ public:
     ROBOT_DISABLED,
     NUM_STATUS_FLAGS //MUST BE LAST
   };
+  static const QMap<STATUS_FLAGS, QString> STATUS_FLAG_STR;
 
   const double m_tripTime;
   const double m_lostPackets;
