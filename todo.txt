@@ -1,0 +1,3 @@
+optimzie the FromLVTime function in the DsLogReader class.
+  should be able to simply use Qt::TimeZone when creating epoch and skip the next couple steps
+cleanup DsLotReader class in general. c++ify it
