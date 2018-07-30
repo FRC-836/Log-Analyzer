@@ -61,7 +61,7 @@ void DsLogReader::readFile(const QString& path)
   {
   } //end  els
 }
-QDateTime DsLogReader::FromLVTime(long unixTime, std::uint64_t ummm)
+QDateTime DsLogReader::FromLVTime(unsigned long long unixTime, std::uint64_t ummm)
 {
   //have to use this instead of msecsFromEpoc because QT Epoch 1970
   auto epoch = QDateTime(QDate(1904, 1, 1), QTime(0, 0, 0), Qt::UTC);

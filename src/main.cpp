@@ -23,7 +23,7 @@ int main(int argc, char** argv)
   if (file.is_open())
   {
     auto entries = reader.getEntries();
-    file << "Trip Time, Lost Packets, Voltage, RobotRIO CPU, CAN Utilization, ";
+    file << "Date-Time, Trip Time, Lost Packets, Voltage, RobotRIO CPU, CAN Utilization, ";
     for (int i = 0; i < (int)DsLogEntry::STATUS_FLAGS::NUM_STATUS_FLAGS; i++)
     {
       file << DsLogEntry::STATUS_FLAG_STR[static_cast<DsLogEntry::STATUS_FLAGS>(i)].toStdString() << ", ";
@@ -35,7 +35,7 @@ int main(int argc, char** argv)
     file << std::endl;
     for (int i = 0; i < entries.size(); i++)
     {
-      file << entries[i].m_tripTime << ", " << entries[i].m_lostPackets << ", "
+      file << entries[i].m_time.toString().toStdString() << ", " << entries[i].m_tripTime << ", " << entries[i].m_lostPackets << ", "
         << entries[i].m_voltage << ", " << entries[i].m_roboRioCpu << ", "
         << entries[i].m_canUtil << ", " << entries[i].m_statusFlags[0] << ", " 
         << entries[i].m_statusFlags[1] << ", " << entries[i].m_statusFlags[2] << ", " 

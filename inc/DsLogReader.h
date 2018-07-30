@@ -76,7 +76,7 @@ private:
 
   //private functions
   virtual void readFile(const QString& path);
-  QDateTime FromLVTime(long unixTime, std::uint64_t ummm);
+  QDateTime FromLVTime(unsigned long long unixTime, std::uint64_t ummm);
   double TripTimeToDouble(std::uint8_t b);
   double PacketLossToDouble(std::int8_t b);
   double VoltageToDouble(std::uint16_t i);
